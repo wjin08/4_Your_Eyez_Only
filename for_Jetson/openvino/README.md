@@ -1,7 +1,7 @@
 
 # Jetson + OpenVINO Object & Color Detection
 
-이 프로젝트는 **Jetson 보드(ARM CPU)**에서 **OpenVINO**와 **OpenCV**를 활용하여  
+이 프로젝트는 **ARM CPU가 탑재된 Jetson Nano**에서 **OpenVINO**와 **OpenCV**를 활용하여  
 이미지에서 객체 탐지와 색상 분석을 수행하는 예제입니다.  
 
 탐지된 결과는 지정된 폴더에 저장되며, 원본 이미지 위에 **바운딩 박스, 클래스명, 색상 정보**가 표시됩니다.
@@ -104,8 +104,15 @@ python3 opencv_with_test.py
 
 ## 7. 예시
 
-* **입력** : `sample_image/cat.jpg`
-* **출력** : `result_image/cat_result.jpg`
+* **입력** :
+![20250904_004449](https://github.com/user-attachments/assets/8bb5332d-9d95-4496-aa85-0a1c8a1636da)
+![Jesus-Is-West-Hoodies-for-Men-433x516](https://github.com/user-attachments/assets/16c9c778-793b-45c7-9f31-a08136a271f8)
+
+  
+* **출력** :
+![20250904_004449](https://github.com/user-attachments/assets/086d0f6f-2b9e-42bc-808a-511881c8c725)
+![Jesus-Is-West-Hoodies-for-Men-433x516](https://github.com/user-attachments/assets/f5fe9d0e-8428-467d-975c-b09ed19381e1)
+
 
 ---
 
