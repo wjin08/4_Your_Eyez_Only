@@ -9,6 +9,12 @@
 <img width="500" height="600" alt="Image" src="https://github.com/user-attachments/assets/ada0de24-d63b-4cd6-a93c-ecc28dbea649" />
 
 
+
+
+https://github.com/user-attachments/assets/a497f0ac-2e05-4e3b-bd7c-a2312b71a258
+
+
+
 캡쳐를 통해 거울에 보이는 자신의 옷을 찍고 보이는 윗옷에 어울리는 스타일을 연결된 AI로부터 추천 받을 수 있습니다.
 위험들은 화재, 건설현장, 총기, 폭발, 등에 대해서 위험을 감지한다면 소리로 위험을 알립니다. 
 
