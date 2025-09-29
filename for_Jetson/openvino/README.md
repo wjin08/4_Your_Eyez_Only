@@ -1,214 +1,111 @@
-# Code deployment
-## Table of contents
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Installation](#Installation)
-- [Usage](#usage)
-- [Troubleshooting](#troubleshooting)
-- [Package contents](#package-contents)
 
+# Jetson + OpenVINO Object & Color Detection
 
-## Introduction
+이 프로젝트는 **Jetson 보드(ARM CPU)**에서 **OpenVINO**와 **OpenCV**를 활용하여  
+이미지에서 객체 탐지와 색상 분석을 수행하는 예제입니다.  
 
-This code deployment .zip archive contains:
+탐지된 결과는 지정된 폴더에 저장되며, 원본 이미지 위에 **바운딩 박스, 클래스명, 색상 정보**가 표시됩니다.
 
-1. Inference model(s) for your Intel® Geti™ project.
+---
 
-2. A sample image or video frame, exported from your project.   
+## 1. 환경 준비
 
-3. A very simple code example to get and visualize the result of inference for your 
-   project, on the sample image.
-   
-4. Jupyter notebooks with instructions and code for running inference locally for your project.
+### 1.1 가상환경 생성 및 활성화
+```bash
+python3 -m venv onnx_venv
+source onnx_venv/bin/activate
+````
 
-The deployment holds one model for each task in your project, so if for example 
-you created a deployment for a `Detection -> Classification` project, it will consist of
-both a detection, and a classification model. The Intel® Geti™ SDK is used to run 
-inference for all models in the project's task chain.
+### 1.2 필수 패키지 설치
 
-This README describes the steps required to get the code sample up and running on your 
-machine.
+```bash
+pip install --upgrade pip
+pip install openvino opencv-python numpy
+```
 
-## Prerequisites
+---
 
-- [Python](https://www.python.org/downloads/) (>=3.9, <=3.12)
+## 2. 프로젝트 구조
 
-## Installation
+```
+패키지 구성
+openvino/
+├── LICENSE
+├── README.md
+├── deployment/
+│   ├── Classification/        # 분류 모델 관련 파일
+│   ├── Detection/             # 객체 탐지 모델 관련 파일
+│   ├── sample_image/          # 입력 이미지 폴더
+│   ├── result_image/          # 추론 결과 저장 폴더
+│   ├── opencv_with_test.py    # 객체 탐지 + 색상 분석 메인 코드
+│   ├── chain_test.py          # 분류 테스트 스크립트
+│   ├── debug.py               # 디버깅용 코드
+│   └── project.json           # 프로젝트 메타데이터
+└── example_code/
+    ├── demo.py
+    ├── demo_notebook.ipynb
+    ├── requirements.txt
+    └── requirements-notebook.txt
 
-1. Install [prerequisites](#prerequisites). You may also need to 
-   [install pip](https://pip.pypa.io/en/stable/installation/). For example, on Ubuntu 
-   execute the following command to install Python and pip:
+```
+LICENSE — 라이선스 파일
 
-   ```
-   sudo apt install python3-dev python3-pip
-   ```
-   If you already have installed pip before, make sure it is up to date by doing:
+README.md — 설명 문서
 
-   ```
-   pip install --upgrade pip
-   ```
+deployment/ — 모델, 샘플 이미지, 결과 폴더, 데모 및 테스트 스크립트 포함
 
-2. Create a clean virtual environment: <a name="virtual-env-creation"></a>
+example_code/ — 데모 실행 스크립트 및 Jupyter 노트북
 
-   One of the possible ways for creating a virtual environment is to use `virtualenv`:
+**<span style="color:red; font-weight:bold;">opencv_with_test.py</span> — 객체 탐지 + 색상 분석 메인 코드**
 
-   ```
-   python -m pip install virtualenv
-   python -m virtualenv <directory_for_environment>
-   ```
+---
 
-   Before starting to work inside the virtual environment, it should be activated:
+## 3. 실행 방법
 
-   On Linux and macOS:
+### 3.1 입력 이미지 준비
 
-   ```
-   source <directory_for_environment>/bin/activate
-   ```
+`deployed/deployment/sample_image/` 폴더에 `.jpg` 파일을 넣습니다.
 
-   On Windows:
+### 3.2 코드 실행
 
-   ```
-   .\<directory_for_environment>\Scripts\activate
-   ```
+```bash
+cd ~/openvino/deployed/deployment
+python3 opencv_with_test.py
+```
 
-   Please make sure that the environment contains 
-   [wheel](https://pypi.org/project/wheel/) by calling the following command:
+---
 
-   ```
-   python -m pip install wheel
-   ```
+## 4. 결과 확인
 
-   > **NOTE**: On Linux and macOS, you may need to type `python3` instead of `python`.
+탐지된 이미지는 `../result_image/` 폴더에 저장됩니다.
 
-3. In your terminal, navigate to the `example_code` directory in the code deployment 
-   package.
+* 원본 위에 **바운딩 박스, 클래스명, 색상 정보**가 표시됩니다.
 
-4. Install requirements in the environment:
+---
 
-   ```
-   python -m pip install -r requirements.txt
-   ```
+## 5. 주요 기능
 
-5. (Optional) Install the requirements for running the `demo_notebook.ipynb` Juypter notebook:
+* OpenVINO를 활용한 **객체 탐지**
+* 상위 2~3개 결과만 **바운딩 박스**로 표시
+* 박스 중앙에 **클래스명 + 색상명 출력**
+* 탐지 영역의 **평균 색상 계산 및 표시**
+* 결과 이미지를 지정 폴더에 저장
 
-   ```
-   python -m pip install -r requirements-notebook.txt
-   ```
-   
-## Usage
-### Local inference
-Both `demo.py` script and the `demo_notebook.ipynb` notebook contain a code sample for:
+---
 
-1. Loading the code deployment (and the models it contains) into memory.
+## 6. OpenVINO가 Jetson에서 동작하는 이유
 
-2. Loading the `sample_image.jpg`, which is a random image taken from the project you 
-   deployed. 
+* OpenVINO는 Intel 전용이 아님 → **ARM 아키텍처용 빌드 제공**
+* Jetson 환경에서는 **ARM Compute Library**를 활용해 연산 최적화
+* Intel CPU 전용 기능은 빠지지만, 기본적인 **추론 기능은 동일하게 지원**
+* 따라서 **Intel 하드웨어 없이도 Jetson(ARM 보드)에서 실행 가능**
 
-3. Running inference on the sample image.
+---
 
-4. Visualizing the inference results.
+## 7. 예시
 
-### Inference with OpenVINO Model Server
-Inference with OpenVINO Model Server (OVMS) is deprecated in Intel® Geti™ SDK.
+* **입력** : `sample_image/cat.jpg`
+* **출력** : `result_image/cat_result.jpg`
 
-To use OVMS, create a new model deployment in Intel® Geti™ and select "OpenVINO Model Server deployment". 
-After downloading the deployment package, follow the included README instructions to run OVMS.
+---
 
-### Running the demo script
-
-In your terminal:
-
-1. Make sure the virtual environment created [above](#virtual-env-creation) is activated.
-
-2. Make sure you are in the `example_code` directory in your terminal.
-
-3. Run the demo using:
-  
-   ```
-   python demo.py
-   ```
-
-The script will run inference on the `sample_image.jpg`. A window will pop up that 
-displays the image, and the results of the inference visualized on top of it.
-
-### Running the demo notebooks
-
-In your terminal:
-
-1. Make sure the virtual environment created [above](#virtual-env-creation) is activated.
-
-2. Make sure you are in the `example_code` directory in your terminal.
-
-3. Start JupyterLab using:
-   
-   ```
-   jupyter lab
-   ```
-   
-4. This should launch your web browser and take you to the main page of JupyterLab.
-
-Inside JuypterLab:
-
-5. In the sidebar of the JupyterLab interface, double-click on `demo_notebook.ipynb` open one of the notebooks.
-   
-6. Execute the notebook cell by cell to view the inference results. 
-
-
-> **NOTE** The `demo_notebook.ipynb` is a great way to explore the `AnnotationScene` 
-> object that is returned by the inference. The demo code only has very basic 
-> visualization functionality, which may not be sufficient for all use case. For 
-> example if your project contains many labels, it may not be able to visualize the 
-> results very well. In that case, you should build your own visualization logic 
-> based on the `AnnotationScene` returned by the `deployment.infer()` method.
-
-## Troubleshooting
-
-1. If you have access to the Internet through a proxy server only, please use pip 
-   with a proxy call as demonstrated by the command below:
-
-   ```
-   python -m pip install --proxy http://<usr_name>:<password>@<proxyserver_name>:<port#> <pkg_name>
-   ```
-
-2. If you use Anaconda as environment manager, please consider that OpenVINO has 
-   limited [Conda support](https://docs.openvino.ai/2021.4/openvino_docs_install_guides_installing_openvino_conda.html). 
-   It is still possible to use `conda` to create and activate your python environment, 
-   but in that case please use only `pip` (rather than `conda`) as a package manager 
-   for installing packages in your environment.
-
-3. If you have problems when you try to use the `pip install` command, please update 
-   pip version as per the following command:
-   ```
-   python -m pip install --upgrade pip
-   ```
-
-## Package contents
-
-The code deployment files are structured as follows:
-
-- deployment
-    - `project.json`
-    - "<title of task 1>"  
-        - model
-          - `model.xml`
-          - `model.bin`
-          - `config.json`
-        - python
-          - model_wrappers
-            - `__init__.py`
-            - model_wrappers required to run demo
-          - `README.md`
-          - `LICENSE`
-          - `demo.py`
-          - `requirements.txt`
-    - "<title of task 2>" (Optional)
-        - ...
-- example_code
-    - `demo.py`
-    - `demo_notebook.ipynb`
-    - `demo_ovms.ipynb`  
-    - `README.md`
-    - `requirements.txt`
-    - `requirements-notebook.txt`
-- `sample_image.jpg`
-- `LICENSE`
