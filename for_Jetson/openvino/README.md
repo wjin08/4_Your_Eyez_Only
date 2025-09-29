@@ -28,18 +28,35 @@ pip install openvino opencv-python numpy
 ## 2. 프로젝트 구조
 
 ```
+패키지 구성
 openvino/
- └── deployed/
-      ├── deployment/
-      │    ├── opencv_with_test.py   # 메인 실행 코드
-      │    └── sample_image/         # 입력 이미지(.jpg) 저장 폴더
-      │
-      └── result_image/              # 탐지 결과 저장 폴더
-```
+├── LICENSE
+├── README.md
+├── deployment/
+│   ├── Classification/        # 분류 모델 관련 파일
+│   ├── Detection/             # 객체 탐지 모델 관련 파일
+│   ├── sample_image/          # 입력 이미지 폴더
+│   ├── result_image/          # 추론 결과 저장 폴더
+│   ├── opencv_with_test.py    # 객체 탐지 + 색상 분석 메인 코드
+│   ├── chain_test.py          # 분류 테스트 스크립트
+│   ├── debug.py               # 디버깅용 코드
+│   └── project.json           # 프로젝트 메타데이터
+└── example_code/
+    ├── demo.py
+    ├── demo_notebook.ipynb
+    ├── requirements.txt
+    └── requirements-notebook.txt
 
-* **sample_image** : 원본 이미지 저장
-* **result_image** : 탐지 결과 저장
-* **opencv_with_test.py** : 실행할 스크립트
+```
+LICENSE — 라이선스 파일
+
+README.md — 설명 문서
+
+deployment/ — 모델, 샘플 이미지, 결과 폴더, 데모 및 테스트 스크립트 포함
+
+example_code/ — 데모 실행 스크립트 및 Jupyter 노트북
+
+**<span style="color:red; font-weight:bold;">opencv_with_test.py</span> — 객체 탐지 + 색상 분석 메인 코드**
 
 ---
 
