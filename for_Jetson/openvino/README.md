@@ -3,6 +3,7 @@
 
 이 프로젝트는 **ARM CPU가 탑재된 Jetson Nano**에서 **OpenVINO**와 **OpenCV**를 활용하여  
 이미지에서 객체 탐지와 색상 분석을 수행하는 예제입니다.  
+<img width="784" height="374" alt="스크린샷 2025-09-11 163936" src="https://github.com/user-attachments/assets/cc7e2e1f-5f30-4de4-a2f1-f601c02e8a22" />
 
 탐지된 결과는 지정된 폴더에 저장되며, 원본 이미지 위에 **바운딩 박스, 클래스명, 색상 정보**가 표시됩니다.
 
