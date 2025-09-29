@@ -2,6 +2,9 @@
 
 Qt 기반의 실시간 이미지 수신 및 채팅 클라이언트입니다. 서버로부터 AI 분석된 이미지와 메시지를 실시간으로 받아 표시합니다.
 
+![KakaoTalk_20250929_143444588](https://github.com/user-attachments/assets/ee8ee0ae-9806-4f48-8f97-80c870dcc0e6)
+
+
 ## 주요 기능
 
 - **실시간 이미지 수신**: 서버에서 브로드캐스트하는 이미지를 실시간으로 수신 및 표시
@@ -12,7 +15,7 @@ Qt 기반의 실시간 이미지 수신 및 채팅 클라이언트입니다. 서
 ## 시스템 요구사항
 
 - Ubuntu 18.04 이상 (또는 다른 Linux 배포판)
-- Qt 6.x 이상 (Qt 5.14도 지원)
+- Qt 5.14.2
 - GCC 7.0 이상
 - 최소 2GB RAM
 
@@ -32,15 +35,15 @@ chmod +x qt-unified-linux-x64-online.run
 ```
 
 설치 시 다음 구성요소를 선택하세요:
-- Qt 6.8.3 (또는 최신 버전)
+- Qt 5.14.2
 - Desktop gcc 64-bit
 - Qt Creator
 
 ### 2. 프로젝트 클론
 
 ```bash
-git clone https://github.com/yourusername/4YourEyesOnly.git
-cd 4YourEyesOnly
+git clone https://github.com/wjin08/4_Your_Eyez_Only.git
+cd 4_Your_Eyez_Only
 ```
 
 ### 3. 빌드
@@ -90,19 +93,8 @@ ls -la 4YourEyesOnly
 
 ### 주요 UI 구성
 
-```
-┌─────────────────────────────────────────────────┐
-│  [이미지 영역]  │  [수신 데이터 로그]          │
-│                 │                               │
-│  300x300        │  - 연결 메시지               │
-│  실시간 이미지  │  - AI 분석 결과              │
-│                 │  - 채팅 메시지               │
-│                 │                               │
-│  [이미지 지우기]│  [수신 삭제] [서버 연결]     │
-│                 │                               │
-│                 │  [수신자ID] [메시지] [송신]  │
-└─────────────────────────────────────────────────┘
-```
+<img width="699" height="542" alt="KakaoTalk_20250929_144513713" src="https://github.com/user-attachments/assets/bfef7101-51c2-4859-bd06-8ce92152488e" />
+
 
 ### 메시지 전송
 
@@ -153,7 +145,7 @@ IMAGE:filename:filesize\n
 **텍스트 메시지**:
 ```
 [발신자]: 메시지내용\n
-예: [AI_Inference]: 빨간색 Jeans입니다.\n
+예: [AI_Inference]: 검정색 T-Shirts입니다.\n
 ```
 
 ## 설정 변경
@@ -250,4 +242,3 @@ ldd ./4YourEyesOnly
 
 ---
 
-**참고**: 이 프로그램은 Qt 6.8.3에서 테스트되었으며, Qt 5.14 이상에서도 작동합니다.
