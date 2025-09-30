@@ -201,7 +201,7 @@ https://github.com/user-attachments/assets/a497f0ac-2e05-4e3b-bd7c-a2312b71a258
 
 ---
 
-## ✨ 주요 성과
+##  주요 성과
 
 - ✅ **실사 데이터 보강**으로 현장 정확도/안정성 향상
 - ✅ **Detection + Classification 체인**으로 안정적인 옷 유형 인식
