@@ -29,6 +29,8 @@ https://github.com/user-attachments/assets/a497f0ac-2e05-4e3b-bd7c-a2312b71a258
 캡쳐를 통해 거울에 보이는 자신의 옷을 찍고 보이는 윗옷에 어울리는 스타일을 연결된 AI로부터 추천 받을 수 있습니다.
 위험들은 화재, 건설현장, 총기, 폭발, 등에 대해서 위험을 감지한다면 소리로 위험을 알립니다. 
 
+https://github.com/user-attachments/assets/33470d7b-e561-47e4-a1dd-740901fb4c9b
+
 <img width="400" height="300" alt="Image" src="https://github.com/user-attachments/assets/6fe1b7ba-19e4-4d75-a5f1-92d297c0fa27" />
 
 ## 이용한 skill stack 및 장비
